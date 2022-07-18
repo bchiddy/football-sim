@@ -22,11 +22,12 @@ private:
     int m_totalGoalsFor;        // Total goals scored during season.
     int m_totalGoalsAgainst;    // Total goals scored against during season.
     int m_totalPoints;          // Total points for current season.
+    int m_goalDifference;
 
 public:
 
     /**
-        Default constructor and Destructor.
+        Default constructor and destructor.
     */
     Team() {}
     ~Team() {}
@@ -48,13 +49,17 @@ public:
     int getTotalGoalsfor() { return m_totalGoalsFor; }
     int getTotalGoalsAgainst() { return m_totalGoalsAgainst; }
     int getTotalPoints() { return m_totalPoints; }
+    int getGoalDifference() { return m_goalDifference; }
+    void incrementPoints( int amount ) { m_totalPoints += amount; }
 
     /**
         Methods for incrementing overall goals for and against.
         Used during game time.
     */
-    void goalScored() { m_totalGoalsFor++; }
-    void goalAgainstScored() { m_totalGoalsAgainst++; }
+    void goalScored( int amount );
+    void goalAgainstScored( int amount );
+    bool compareTo( Team t );
+
 
     /**
         Prints team name and statistics. See .cpp file for format.

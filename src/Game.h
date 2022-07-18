@@ -40,8 +40,9 @@ public:
         Methods which log home and away goals. Will also log goals against
         for opposite team.
     */
-    void homeGoal();
-    void awayGoal();
+    void startGame();
+    void homeGoal( int amount );
+    void awayGoal( int amount );
 
     /**
         Prints score of game. See .cpp file for format.

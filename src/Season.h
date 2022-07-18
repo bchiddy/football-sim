@@ -11,6 +11,7 @@
 #define SEASON_H
 
 #include "Team.h"
+#include "Game.h"
 #include <string>
 #include <vector>
 #include <map>
@@ -45,6 +46,10 @@ public:
     void roundComplete();
     void printLeagueTable();
     void printRoundFixtures();
+    void updateLeagueTable( );
+    int partition( std::vector<Team> arr, int low, int high );
+    void quickSort( std::vector<Team> arr, int low, int high);
+    void startSeason();
 
 };
 

@@ -1,4 +1,5 @@
 #include "Season.h"
+#include <cmath>
 #include <iostream>
 #include <algorithm>
 #include <random>
@@ -56,14 +57,80 @@ void Season::roundComplete()
     m_roundNumber++;
 }
 
-void Season::printLeagueTable()
+void Season::startSeason()
 {
-    for ( int i = 0; i < m_leagueTable.size(); i++ )
+    int n = m_leagueTable.size();
+
+    std::cout << "\n\n";
+    for ( int k = 0; k < n-1; k++ )
     {
-        m_leagueTable[i].toString();
+        std::cout << "Round " << k+1 << " results:\n\n";
+        for ( int i = 0; i < n/2; i++ )
+        {
+            Game g = Game ( &m_roundFixtures[0][i], &m_roundFixtures[1][i] );
+            g.startGame();
+            g.getScore();
+        }
+        roundComplete();
+
         std::cout << "\n";
     }
-    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
+
+    std::cout << m_roundFixtures[0][0].getTotalPoints() << "\n";
+
+    updateLeagueTable();
+    printLeagueTable();
+    std::cout << "\n\n";
+    std::cout << "********************************************\n";
+}
+
+void Season::printLeagueTable()
+{
+    printf( "%5s  %-16s %s  %s\n", "Pos.", "Team", "Points", "GD" );
+    std::cout << "------------------------------------\n";
+    for ( int i = 0; i < m_leagueTable.size(); i++ )
+    {
+        printf( "%5d  %-16s %6d %3d\n",
+                                    i+1,
+                                    m_leagueTable[i].getName().c_str(),
+                                    m_leagueTable[i].getTotalPoints(),
+                                    m_leagueTable[i].getGoalDifference() );
+
+    }
+    std::cout << "------------------------------------\n";
+}
+
+int Season::partition( std::vector<Team> arr, int low, int high )
+{
+    Team pivot = arr[high];
+    int i = (low - 1);
+
+    for (int j = low; j < high; j++)
+    {
+        if ( !arr[j].compareTo(pivot) )
+        {
+            i++;
+            std::iter_swap( &arr[i], &arr[j] );
+        }
+    }
+
+    std::iter_swap( &arr[i+1], &arr[high] );
+    return (i + 1);
+}
+
+void Season::quickSort( std::vector<Team> arr, int low, int high)
+{
+    if (low < high)
+    {
+        int pivot = partition(arr, low, high);
+        quickSort(arr, low, pivot - 1);
+        quickSort(arr, pivot + 1, high);
+    }
+}
+
+void Season::updateLeagueTable()
+{
+    quickSort( m_leagueTable, 0, m_leagueTable.size() - 1 );
 }
 
 void Season::printRoundFixtures()
