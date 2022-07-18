@@ -3,7 +3,7 @@
 #include <iostream>
 #include <random>
 
-Game::Game( Team homeTeam, Team awayTeam )
+Game::Game( Team *homeTeam, Team *awayTeam )
 {
     m_homeTeam = homeTeam;
     m_awayTeam = awayTeam;
@@ -22,8 +22,8 @@ void Game::homeGoal( int amount )
     */
 
     m_homeTeamGoals += amount;
-    m_homeTeam.goalScored( m_homeTeamGoals );
-    m_awayTeam.goalAgainstScored( m_awayTeamGoals );
+    m_homeTeam -> goalScored( m_homeTeamGoals );
+    m_awayTeam -> goalAgainstScored( m_awayTeamGoals );
 }
 
 void Game::awayGoal( int amount )
@@ -38,8 +38,8 @@ void Game::awayGoal( int amount )
     */
 
     m_awayTeamGoals += amount;
-    m_awayTeam.goalScored( m_awayTeamGoals );
-    m_homeTeam.goalAgainstScored( m_homeTeamGoals );
+    m_awayTeam -> goalScored( m_awayTeamGoals );
+    m_homeTeam -> goalAgainstScored( m_homeTeamGoals );
 }
 
 void Game::startGame()
@@ -49,9 +49,9 @@ void Game::startGame()
     generator.seed( s );
 
     std::poisson_distribution <int>
-                home_xG( (m_homeTeam.get_xG()*0.6) + (m_awayTeam.get_xGA()*0.4) / 2 );
+                home_xG( (m_homeTeam -> get_xG()*0.6) + (m_awayTeam -> get_xGA()*0.4) / 2 );
     std::poisson_distribution <int>
-                away_xG( (m_awayTeam.get_xG()*0.6) + (m_homeTeam.get_xGA()*0.4) / 2 );
+                away_xG( (m_awayTeam -> get_xG()*0.6) + (m_homeTeam -> get_xGA()*0.4) / 2 );
 
     int homeGoals = home_xG( generator );
     int awayGoals = away_xG( generator );
@@ -61,23 +61,23 @@ void Game::startGame()
 
     if ( m_homeTeamGoals > m_awayTeamGoals )
     {
-        m_homeTeam.incrementPoints( 3 );
+        m_homeTeam -> incrementPoints( 3 );
     }
     else if ( m_awayTeamGoals > m_homeTeamGoals )
     {
-        m_awayTeam.incrementPoints( 3 );
+        m_awayTeam -> incrementPoints( 3 );
     }
     else
     {
-        m_homeTeam.incrementPoints( 1 );
-        m_awayTeam.incrementPoints( 1 );
+        m_homeTeam -> incrementPoints( 1 );
+        m_awayTeam -> incrementPoints( 1 );
     }
 }
 
 void Game::getScore()
 {
-    std::cout << m_homeTeam.getName() << " "
+    std::cout << m_homeTeam ->getName() << " "
               << m_homeTeamGoals << " - "
               << m_awayTeamGoals << " "
-              << m_awayTeam.getName() << "\n";
+              << m_awayTeam -> getName() << "\n";
 }

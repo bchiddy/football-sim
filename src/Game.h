@@ -17,8 +17,8 @@ class Game
 {
 private:
 
-    Team m_homeTeam;        // Team playing at home during this game.
-    Team m_awayTeam;        // Team playing away during this game.
+    Team *m_homeTeam;        // Team playing at home during this game.
+    Team *m_awayTeam;        // Team playing away during this game.
     int m_homeTeamGoals;    // Goals score by home team.
     int m_awayTeamGoals;    // Goals score by away team.
 
@@ -34,7 +34,7 @@ public:
         Constructor for simulations where teams are determined in terms
         of home and away.
     */
-    Game( Team homeTeam, Team awayTeam );
+    Game( Team *homeTeam, Team *awayTeam );
 
     /**
         Methods which log home and away goals. Will also log goals against

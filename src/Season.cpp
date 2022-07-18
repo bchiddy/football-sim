@@ -19,15 +19,15 @@ void Season::initialiseFixtures()
 {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::shuffle( m_leagueTable.begin(), m_leagueTable.end(),
-                                        std::default_random_engine(seed) );
+                                         std::default_random_engine(seed) );
 
     int n = 0;
     for ( int i = 0; i < 2; i++)
     {
-        std::vector<Team> v;
+        std::vector<Team *> v;
         for ( int i = 0; i < m_leagueTable.size() / 2; i++ )
         {
-            v.push_back( m_leagueTable[n] );
+            v.push_back( &m_leagueTable[n] );
             n++;
         }
         m_roundFixtures.push_back(v);
@@ -38,7 +38,7 @@ void Season::initialiseFixtures()
 void Season::roundComplete()
 {
     int n = m_leagueTable.size();
-    if ( m_roundNumber == ( n/2 * (n-1) ) )
+    if ( m_roundNumber == ( n-1 ) )
     {
         initialiseFixtures();
         m_roundNumber++;
@@ -62,24 +62,24 @@ void Season::startSeason()
     int n = m_leagueTable.size();
 
     std::cout << "\n\n";
-    for ( int k = 0; k < n-1; k++ )
+    for ( int k = 0; k < (2*n)-2; k++ )
     {
         std::cout << "Round " << k+1 << " results:\n\n";
         for ( int i = 0; i < n/2; i++ )
         {
-            Game g = Game ( &m_roundFixtures[0][i], &m_roundFixtures[1][i] );
+            Game g = Game ( m_roundFixtures[0][i], m_roundFixtures[1][i] );
             g.startGame();
             g.getScore();
         }
         roundComplete();
 
-        std::cout << "\n";
+        bubbleSortTable();
+        std::cout << "\n\n";
+        printLeagueTable();
+
+        std::cout << "\n\n";
     }
 
-    std::cout << m_roundFixtures[0][0].getTotalPoints() << "\n";
-
-    updateLeagueTable();
-    printLeagueTable();
     std::cout << "\n\n";
     std::cout << "********************************************\n";
 }
@@ -100,37 +100,18 @@ void Season::printLeagueTable()
     std::cout << "------------------------------------\n";
 }
 
-int Season::partition( std::vector<Team> arr, int low, int high )
+void Season::bubbleSortTable()
 {
-    Team pivot = arr[high];
-    int i = (low - 1);
-
-    for (int j = low; j < high; j++)
+    for ( int i = 0; i < m_leagueTable.size(); i++ )
     {
-        if ( !arr[j].compareTo(pivot) )
+        for ( int j = 0; j < m_leagueTable.size(); j++ )
         {
-            i++;
-            std::iter_swap( &arr[i], &arr[j] );
+            if ( !m_leagueTable[j].compareTo( m_leagueTable[i] ) )
+            {
+                std::iter_swap( &m_leagueTable[i], &m_leagueTable[j] );
+            }
         }
     }
-
-    std::iter_swap( &arr[i+1], &arr[high] );
-    return (i + 1);
-}
-
-void Season::quickSort( std::vector<Team> arr, int low, int high)
-{
-    if (low < high)
-    {
-        int pivot = partition(arr, low, high);
-        quickSort(arr, low, pivot - 1);
-        quickSort(arr, pivot + 1, high);
-    }
-}
-
-void Season::updateLeagueTable()
-{
-    quickSort( m_leagueTable, 0, m_leagueTable.size() - 1 );
 }
 
 void Season::printRoundFixtures()
@@ -138,9 +119,9 @@ void Season::printRoundFixtures()
     std::cout << "\nRound " << m_roundNumber << " fixtures:\n\n";
     for ( int i = 0; i < (m_leagueTable.size()/2); i++ )
     {
-        std::cout << m_roundFixtures[0][i].getName()
+        std::cout << m_roundFixtures[0][i] -> getName()
                   << " vs "
-                  << m_roundFixtures[1][i].getName()
+                  << m_roundFixtures[1][i] -> getName()
                   << "\n";
     }
     std::cout << "\n";

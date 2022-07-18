@@ -24,7 +24,7 @@ private:
     int m_totalGames;
     int m_roundNumber;
     std::vector<Team> m_leagueTable;
-    std::vector< std::vector<Team> > m_roundFixtures;
+    std::vector< std::vector<Team *> > m_roundFixtures;
 
 public:
 
@@ -40,15 +40,15 @@ public:
     // Accessor methods.
     int getSeasonID() { return m_seasonID; }
     std::vector<Team> getLeagueTable() { return m_leagueTable; };
-    std::vector< std::vector<Team> >  getFixtures() { return m_roundFixtures; };
+    std::vector< std::vector<Team *> >  getFixtures() { return m_roundFixtures; };
 
     void initialiseFixtures();
     void roundComplete();
     void printLeagueTable();
     void printRoundFixtures();
-    void updateLeagueTable( );
-    int partition( std::vector<Team> arr, int low, int high );
-    void quickSort( std::vector<Team> arr, int low, int high);
+    void quickSortLeagueTable( int low, int high );
+    int partition( std::vector<Team> *arr, int low, int high );
+    void bubbleSortTable();
     void startSeason();
 
 };
