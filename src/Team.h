@@ -23,6 +23,10 @@ private:
     int m_totalGoalsAgainst;    // Total goals scored against during season.
     int m_totalPoints;          // Total points for current season.
     int m_goalDifference;       // Goals for - goals against
+    int m_totalWins;            // Total games won.
+    int m_totalDraws;           // Total games drawn.
+    int m_totalLosses;          // Total games lost.
+    int m_totalGamesPlayed;       // Total games played;
 
 public:
 
@@ -48,6 +52,10 @@ public:
     int getTotalGoalsAgainst() { return m_totalGoalsAgainst; }
     int getTotalPoints() { return m_totalPoints; }
     int getGoalDifference() { return m_goalDifference; }
+    int getTotalWins() { return m_totalWins; }
+    int getTotalLosses() { return m_totalLosses; }
+    int getTotalDraws() { return m_totalDraws; }
+    int getTotalGamesPlayed() { return m_totalGamesPlayed; }
 
     /**
         Mutator methods.
@@ -62,6 +70,14 @@ public:
     */
     void goalScored( int amount );
     void goalAgainstScored( int amount );
+
+    /**
+        Methods for logging wins, draws and losses. Will also update
+        total points for this team based on results.
+    */
+    void logWin();
+    void logDraw();
+    void logLoss();
 
     /**
         Method which compares this -> team to another team.

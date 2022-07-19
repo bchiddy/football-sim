@@ -121,17 +121,30 @@ void Season::bubbleSortTable()
 */
 void Season::printLeagueTable()
 {
-    printf( "%5s  %-16s %s  %s\n", "Pos.", "Team", "Points", "GD" );
-    std::cout << "------------------------------------\n";
+    std::cout << "-----------------------------------------------------------\n";
+    printf( "%6s  %-16s %-5s %-5s %-5s %-5s %-5s %-5s\n",
+                                                "Pos.",
+                                                "Team",
+                                                "MP",
+                                                "W",
+                                                "D",
+                                                "L",
+                                                "GD",
+                                                "Pts." );
+    std::cout << "-----------------------------------------------------------\n";
     for ( int i = 0; i < m_leagueTable.size(); i++ )
     {
-        printf( "%5d  %-16s %6d %3d\n",
+        printf( "%6d  %-16s %-5d %-5i %-5d %-5d %-5d %-5d\n",
                                    i+1,
                                    m_leagueTable[i].getName().c_str(),
-                                   m_leagueTable[i].getTotalPoints(),
-                                   m_leagueTable[i].getGoalDifference() );
+                                   m_leagueTable[i].getTotalGamesPlayed(),
+                                   m_leagueTable[i].getTotalWins(),
+                                   m_leagueTable[i].getTotalDraws(),
+                                   m_leagueTable[i].getTotalLosses(),
+                                   m_leagueTable[i].getGoalDifference(),
+                                   m_leagueTable[i].getTotalPoints() );
     }
-    std::cout << "------------------------------------\n";
+    std::cout << "-----------------------------------------------------------\n";
 }
 
 /**

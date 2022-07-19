@@ -10,6 +10,10 @@ Team::Team( std::string name, double xG, double xGA )
     m_totalGoalsAgainst = 0;
     m_totalPoints = 0;
     m_goalDifference = 0;
+    m_totalWins = 0;
+    m_totalDraws = 0;
+    m_totalLosses =0;
+    m_totalGamesPlayed = 0;
 }
 
 void Team::goalScored( int amount )
@@ -22,7 +26,27 @@ void Team::goalAgainstScored( int amount )
 {
     m_totalGoalsAgainst += amount;
     m_goalDifference = m_totalGoalsFor - m_totalGoalsAgainst;
+}
 
+void Team::logWin()
+{
+    m_totalWins += 1;
+    m_totalPoints += 3;
+    m_totalGamesPlayed++;
+}
+
+void Team::logDraw()
+{
+    m_totalDraws += 1;
+    m_totalPoints += 1;
+    m_totalGamesPlayed++;
+}
+
+void Team::logLoss()
+{
+    m_totalLosses += 1;
+    m_totalPoints += 0; // Added for completeness.
+    m_totalGamesPlayed++;
 }
 
 bool Team::compareTo( Team t )

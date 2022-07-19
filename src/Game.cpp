@@ -15,14 +15,14 @@ void Game::homeGoal( int amount )
 {
     m_homeTeamGoals += amount;
     m_homeTeam -> goalScored( m_homeTeamGoals );
-    m_awayTeam -> goalAgainstScored( m_awayTeamGoals );
+    m_awayTeam -> goalAgainstScored( m_homeTeamGoals );
 }
 
 void Game::awayGoal( int amount )
 {
     m_awayTeamGoals += amount;
     m_awayTeam -> goalScored( m_awayTeamGoals );
-    m_homeTeam -> goalAgainstScored( m_homeTeamGoals );
+    m_homeTeam -> goalAgainstScored( m_awayTeamGoals );
 }
 
 void Game::startGame()
@@ -56,16 +56,18 @@ void Game::startGame()
     */
     if ( m_homeTeamGoals > m_awayTeamGoals )
     {
-        m_homeTeam -> incrementPoints( 3 );
+        m_homeTeam -> logWin();
+        m_awayTeam -> logLoss();
     }
     else if ( m_awayTeamGoals > m_homeTeamGoals )
     {
-        m_awayTeam -> incrementPoints( 3 );
+        m_awayTeam -> logWin();
+        m_homeTeam -> logLoss();
     }
     else
     {
-        m_homeTeam -> incrementPoints( 1 );
-        m_awayTeam -> incrementPoints( 1 );
+        m_homeTeam -> logDraw();
+        m_awayTeam -> logDraw();
     }
 }
 

@@ -10,7 +10,7 @@
 CC := g++
 SRCDIR := src
 BUILDDIR := build
-TARGET := simulate
+TARGET := exe
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
