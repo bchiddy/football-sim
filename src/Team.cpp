@@ -27,6 +27,7 @@ void Team::goalAgainstScored( int amount )
 
 bool Team::compareTo( Team t )
 {
+    // Check if this -> team has more points.
     if ( m_totalPoints > t.getTotalPoints() )
     {
         return true;
@@ -35,6 +36,7 @@ bool Team::compareTo( Team t )
     {
         return false;
     }
+    // If points are equal check if this -> team has higher goal difference.
     else
     {
         if ( m_goalDifference > t.getGoalDifference() )

@@ -29,7 +29,6 @@ int main()
         if ( proceed.compare("Y") == 0 )
         {
             std::vector<Team> teams = parseCSV("data/season.csv");
-            //Season first = Season( 1, teams );
 
             Season first = Season( 1, teams );
             first.startSeason();

@@ -4,7 +4,7 @@
 
     @author:        Ben Chiddy
     @contact:       ben.chiddy@gmail.com
-    @since:         08 July 2022
+    @since:         19 July 2022
 */
 
 #ifndef TEAM_H
@@ -22,7 +22,7 @@ private:
     int m_totalGoalsFor;        // Total goals scored during season.
     int m_totalGoalsAgainst;    // Total goals scored against during season.
     int m_totalPoints;          // Total points for current season.
-    int m_goalDifference;
+    int m_goalDifference;       // Goals for - goals against
 
 public:
 
@@ -42,27 +42,44 @@ public:
         Accessor methods.
     */
     std::string getName() { return m_name; }
-    void set_xG( double xG ) { m_xG = xG; }
-    void set_xGA( double xGA ) { m_xGA = xGA; }
     double get_xG() { return m_xG; }
     double get_xGA() { return m_xGA; }
     int getTotalGoalsfor() { return m_totalGoalsFor; }
     int getTotalGoalsAgainst() { return m_totalGoalsAgainst; }
     int getTotalPoints() { return m_totalPoints; }
     int getGoalDifference() { return m_goalDifference; }
+
+    /**
+        Mutator methods.
+    */
+    void set_xG( double xG ) { m_xG = xG; }
+    void set_xGA( double xGA ) { m_xGA = xGA; }
     void incrementPoints( int amount ) { m_totalPoints += amount; }
 
     /**
         Methods for incrementing overall goals for and against.
-        Used during game time.
+        Used during the lifetime of a game.
     */
     void goalScored( int amount );
     void goalAgainstScored( int amount );
-    bool compareTo( Team t );
-
 
     /**
-        Prints team name and statistics. See .cpp file for format.
+        Method which compares this -> team to another team.
+
+        Returns true if this -> team has higher total points.
+        If this -> team has equal points returns true if this -> team
+        has a higher goal difference.
+
+        Used when sorted league table.
+    */
+    bool compareTo( Team t );
+
+    /**
+        Prints team name and statistics.
+
+        Format: "Team name: [teamName]"
+                "xG:         [xG]"
+                "xGA:        [xGA]"
     */
     void toString();
 };
