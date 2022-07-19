@@ -13,7 +13,7 @@ Season::Season( int seasonID, std::vector<Team> teams )
     m_leagueTable = teams;
     m_leagueSize = teams.size();
 
-    // Using round robin format tot. games = n/2 * (n - 1)
+    // Using round robin format where tot. games = n/2 * (n - 1)
     m_totalGames = ( teams.size()/2 ) * ( teams.size() - 1 );
 
     // Randomises league table based on a random seed and creates fixture matrix.
