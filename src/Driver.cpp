@@ -1,7 +1,7 @@
-#include "Game.h"
-#include "Team.h"
-#include "Season.h"
-#include "SimulationResults.h"
+#include "../include/Game.h"
+#include "../include/Team.h"
+#include "../include/Season.h"
+#include "../include/SimulationResults.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -30,13 +30,11 @@ int main()
         if ( proceed.compare("Y") == 0 )
         {
             std::vector<Team> teams = parseCSV("data/season.csv");
-            SimulationResults sR = SimulationResults( 10 );
 
             for ( int i = 0; i < 11; i++ )
             {
                 Season s = Season( i, teams );
                 s.startSeason();
-                sR.addSeason( s );
             }
 
         }

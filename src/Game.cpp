@@ -1,5 +1,5 @@
-#include "Game.h"
-#include "Team.h"
+#include "../include/Game.h"
+#include "../include/Team.h"
 #include <iostream>
 #include <random>
 

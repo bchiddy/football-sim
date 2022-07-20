@@ -1,4 +1,4 @@
-#include "Season.h"
+#include "../include/Season.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>

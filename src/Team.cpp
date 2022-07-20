@@ -1,4 +1,4 @@
-#include "Team.h"
+#include "../include/Team.h"
 #include <iostream>
 
 Team::Team( std::string name, double xG, double xGA )
