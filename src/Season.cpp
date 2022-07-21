@@ -38,7 +38,7 @@ void Season::startSeason()
     }
 
     bubbleSortTable();    // Sorts league table only after season complete.
-    printLeagueTable();
+    // printLeagueTable();
 }
 
 void Season::initialiseFixtures()

@@ -4,12 +4,10 @@
 #include <fstream>
 #include <sstream>
 
-IODriver::IODriver( std::string inputFileName,
-                    std::string outputFileName, int numberOfSeasons )
+IODriver::IODriver( std::string inputFileName, std::string outputFileName )
 {
     m_inputFileName = inputFileName;
     m_outputFileName = outputFileName;
-    m_numberOfSeasons = numberOfSeasons;
 }
 
 std::vector<Team> IODriver::parseCSV( )

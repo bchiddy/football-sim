@@ -11,46 +11,57 @@ void printLeague( std::vector<Team> teams );
 
 int main()
 {
-    std::string proceed;
-
     std::cout << "\n";
-    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
-    std::cout << "Welcome to the Premier League simulator!\n";
-    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
-    std::cout << "Would you like to start? [Y/N]: ";
-    std::cin >> proceed;
-    std::cout << "\n";
+    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
+    std::cout << "* Welcome to the Premier League simulator! *\n";
+    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
 
-    // Read and run simulation
+    IODriver io = IODriver( "data/season.csv", "data/results.csv" );
+    std::vector<Team> teams = io.parseCSV();
+
+    std::string selection;
+
     do
     {
-        if ( proceed.compare("Y") == 0 )
-        {
-            IODriver io = IODriver( "data/season.csv", "data/results.csv", 5 );
-            std::vector<Team> teams = io.parseCSV();
+        std::cout << "\n";
+        std::cout << "Please select: \n";
+        std::cout << "[1] Simulate a single season.\n";
+        std::cout << "[2] Simulate multiple seasons.\n";
+        std::cout << "[3] Exit simulator.\n";
+        std::cout << "\n";
+        std::cout << "Enter selection: ";
+        std::cin >> selection;
+        std::cout << "\n";
 
+        if ( selection.compare("1") == 0 )
+        {
+            Season s = Season( 1, teams );
+            s.startSeason();
+            s.printLeagueTable();
+        }
+        else if ( selection.compare("2") == 0 )
+        {
+            std::cout << "Starting simulation . . .\n";
             for ( int i = 0; i < 500; i++ )
             {
                 Season s = Season( i, teams );
                 s.startSeason();
                 io.writeResultToCSV( s.getLeagueTable() );
             }
-
+            std::cout << "Simulation complete! See /docs/results.csv for results.\n";
         }
-        else if ( proceed.compare("N") == 0 )
+        else
         {
-            std::cout << "Ok. Goodbye\n";
+            std::cout << "Please select either [1],[2], or [3] \n";
         }
 
-        std::cout << "Would you like to run the simulation again? [Y/N]: ";
-        std::cin >> proceed;
-        std::cout << "\n";
+    } while ( selection.compare("3") != 0 );
 
-    } while ( proceed.compare("Y") == 0 );
-
-    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
-    std::cout << "Thanks for using the Premier League simulator. Goodbye.\n";
-    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
+    std::cout << "\n";
+    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
+    std::cout << "* Thanks for using the Premier League simulator. Goodbye. *\n";
+    std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
+    std::cout << "\n";
 
     return 0;
 }

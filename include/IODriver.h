@@ -14,7 +14,6 @@ private:
 
     std::string m_inputFileName;
     std::string m_outputFileName;
-    int m_numberOfSeasons;
     std::map<std::string, int> m_positionMap;
 
 public:
@@ -22,8 +21,7 @@ public:
     IODriver() {}
     ~IODriver() {}
 
-    IODriver( std::string inputFileName,
-              std::string outputFileName, int numberOfSeasons );
+    IODriver( std::string inputFileName, std::string outputFileName );
 
     void createPositionMap( std::vector<Team> teams );
     std::vector<Team> parseCSV();
