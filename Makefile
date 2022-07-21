@@ -4,8 +4,8 @@
 # @contact:       ben.chiddy@gmail.com
 # @since:         09 July 2022
 # @reference:	  Hilton Lipschitz
-# @url:  <https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/
-# ***********************************************************************************
+# <https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/
+# *****************************************************************************
 
 CC := g++
 SRCDIR := src
