@@ -2,6 +2,7 @@
 #include "../include/Team.h"
 #include "../include/Season.h"
 #include "../include/IODriver.h"
+#include <chrono>
 #include <iostream>
 
 /**
@@ -20,6 +21,7 @@ int main()
     std::vector<Team> teams = io.parseCSV();
 
     std::string selection;
+    int numberOfSeasons = 1;
 
     do
     {
@@ -41,14 +43,25 @@ int main()
         }
         else if ( selection.compare("2") == 0 )
         {
+            std::cout << "Enter many seasons would you like to simulate: ";
+            std::cin >> numberOfSeasons;
+
+            auto start = std::chrono::high_resolution_clock::now();
             std::cout << "Starting simulation . . .\n";
-            for ( int i = 0; i < 500; i++ )
+            for ( int i = 0; i < numberOfSeasons; i++ )
             {
                 Season s = Season( i, teams );
                 s.startSeason();
                 io.writeResultToCSV( s.getLeagueTable() );
             }
-            std::cout << "Simulation complete! See /docs/results.csv for results.\n";
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto duration = duration_cast<std::chrono::microseconds>(stop - start);
+            std::cout << "Simulation complete! See /docs/results.csv for results.\n\n";
+            std::cout << "Time taken to run " << numberOfSeasons
+                                              << " seasons: "
+                                              << duration.count() / 1000
+                                              << " miliseconds.\n\n";
+            std::cout << "See /docs/results.csv for results.\n";
         }
         else
         {
