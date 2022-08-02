@@ -25,6 +25,7 @@ int main()
 
     do
     {
+        system("clear");
         std::cout << "\n";
         std::cout << "Please select: \n";
         std::cout << "[1] Simulate a single season.\n";
@@ -37,12 +38,14 @@ int main()
 
         if ( selection.compare("1") == 0 )
         {
+            system("clear");
             Season s = Season( 1, teams );
             s.startSeason();
             s.printLeagueTable();
         }
         else if ( selection.compare("2") == 0 )
         {
+            system("clear");
             std::cout << "Enter many seasons would you like to simulate: ";
             std::cin >> numberOfSeasons;
 
@@ -65,11 +68,13 @@ int main()
         }
         else
         {
+            system("clear");
             std::cout << "Please select either [1],[2], or [3] \n";
         }
 
     } while ( selection.compare("3") != 0 );
 
+    system("clear");
     std::cout << "\n";
     std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
     std::cout << "* Thanks for using the Premier League simulator. Goodbye. *\n";
