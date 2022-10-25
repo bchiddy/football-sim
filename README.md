@@ -1,6 +1,5 @@
 # football-league-simulation
-A premier league model for simulation using c++. 
 
-Allows user to simulate multiple seasons and aggregate results to mke predictions for eventual league position.
+Monte Carlo simulation of the premier league built using C++.
 
 More in-depth ReadMe coming soon.
