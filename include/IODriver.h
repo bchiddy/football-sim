@@ -7,6 +7,7 @@
 #include <map>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 class IODriver
 {
@@ -25,6 +26,7 @@ public:
 
     void createPositionMap( std::vector<Team> teams );
     std::vector<Team> parseCSV();
+    std::map<double, int> createScoringDistribution( std::string teamName );
     void createCSVHeader();
     void writeResultToCSV( std::vector<Team> leaguePositions );
 

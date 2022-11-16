@@ -11,6 +11,7 @@
 #define TEAM_H
 
 #include <string>
+#include <map>
 
 class Team
 {
@@ -26,7 +27,8 @@ private:
     int m_totalWins;            // Total games won.
     int m_totalDraws;           // Total games drawn.
     int m_totalLosses;          // Total games lost.
-    int m_totalGamesPlayed;       // Total games played;
+    int m_totalGamesPlayed;     // Total games played;
+    std::map<double, int> m_scoringDistribution;
 
 public:
 
@@ -40,7 +42,7 @@ public:
         Constructor for simulations that only take season
         xG/xGA into account.
     */
-    Team( std::string name, double xG, double xGA );
+    Team( std::string name, double xG, double xGA, std::map<double, int> scoringDistribution );
 
     /**
         Accessor methods.

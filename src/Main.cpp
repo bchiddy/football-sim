@@ -16,7 +16,7 @@ int main()
     std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
     std::cout << "* Welcome to the Premier League simulator! *\n";
     std::cout << "* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ *\n";
-
+    
     IODriver io = IODriver( "data/season.csv", "data/results.csv" );
     std::vector<Team> teams = io.parseCSV();
 
@@ -25,7 +25,7 @@ int main()
 
     do
     {
-        system("clear");
+        // system("clear");
         std::cout << "\n";
         std::cout << "Please select: \n";
         std::cout << "[1] Simulate a single season.\n";

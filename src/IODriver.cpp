@@ -1,8 +1,10 @@
 #include "../include/IODriver.h"
 #include "../include/Team.h"
 #include <vector>
+#include <map>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 IODriver::IODriver( std::string inputFileName, std::string outputFileName )
 {
@@ -19,6 +21,7 @@ std::vector<Team> IODriver::parseCSV( )
 
     while ( getline(inputFile, line) )
     {
+        
         std::stringstream inputString(line);
         std::string tempString;
         std::string name;
@@ -36,8 +39,11 @@ std::vector<Team> IODriver::parseCSV( )
         getline(inputString, tempString);
         xGA = atof(tempString.c_str());
 
+        // Create goal scoring distubtion for team
+        std::map<double, int> scoringDistribution = createScoringDistribution( name );
+        
         // Add to teams vector.
-        Team team = Team( name, xG, xGA );
+        Team team = Team( name, xG, xGA, scoringDistribution);
         teams.push_back( team );
         line = "";
     }
@@ -47,6 +53,50 @@ std::vector<Team> IODriver::parseCSV( )
     createPositionMap( teams );
     createCSVHeader();
     return teams;
+}
+
+// new code for parsing goals scored into a team distribution for scorring
+std::map<double, int> IODriver::createScoringDistribution( std::string teamName )
+{
+    std::ifstream inputFile;
+    inputFile.open( "data/2022/" + teamName + ".csv");
+    std::string line = "";
+    std::vector<int> goals;
+    std::map<double, int> scoringDistribution; 
+
+    // Parse historic goals scored
+    while ( getline(inputFile, line) )
+    {
+        std::stringstream inputString(line);
+        std::string tempString;
+        std::string name;
+
+        // Record goal
+        getline(inputString, tempString);
+        goals.push_back( atoi(tempString.c_str()) );
+        line = "";
+    }
+    sort( goals.begin(), goals.end() );
+    inputFile.close();
+
+    // Create Distribution
+    double proportion = 0;
+    int position = 0;
+    std::cout << teamName << "\n";
+    for ( int i=0; i < goals[goals.size()-1]; i++)
+    {
+        int count = 0;
+        while ( goals[position] == i)
+        {
+            count++;
+            position++;
+        }
+
+        proportion = proportion + (double) count / goals.size();
+        scoringDistribution.insert( {proportion, i} );
+    }
+
+    return scoringDistribution;
 }
 
 void IODriver::createPositionMap( std::vector<Team> teams )
@@ -96,3 +146,4 @@ void IODriver::writeResultToCSV( std::vector<Team> leaguePositions )
     outputFile << "\n";
     outputFile.close();
 }
+

@@ -1,7 +1,9 @@
 #include "../include/Team.h"
 #include <iostream>
+#include <vector>
+#include <map>
 
-Team::Team( std::string name, double xG, double xGA )
+Team::Team( std::string name, double xG, double xGA, std::map<double, int> scoringDistribution )
 {
     m_name = name;
     m_xG = xG;
@@ -12,8 +14,10 @@ Team::Team( std::string name, double xG, double xGA )
     m_goalDifference = 0;
     m_totalWins = 0;
     m_totalDraws = 0;
-    m_totalLosses =0;
+    m_totalLosses = 0;
     m_totalGamesPlayed = 0;
+    m_scoringDistribution = scoringDistribution;
+
 }
 
 void Team::goalScored( int amount )
