@@ -82,7 +82,7 @@ std::map<double, int> IODriver::createScoringDistribution( std::string teamName 
     // Create Distribution
     double proportion = 0;
     int position = 0;
-    std::cout << teamName << "\n";
+    // std::cout << teamName << "\n";
     for ( int i=0; i < goals[goals.size()-1]; i++)
     {
         int count = 0;
