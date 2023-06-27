@@ -17,13 +17,11 @@ To use the Premier League Simulator, follow these steps:
 
 ```git clone https://github.com/bchiddy/football-sim```
 
-2. **Compile the Program:** Compile the C++ source code using your preferred compiler. For example, using `g++`:
-
-```g++ -o simulator main.cpp```
-
 3. **Run the Program:** Execute the compiled binary to start the Premier League simulation.
 
-4. **View the Results:** Once the simulation is complete, the program will display the final league table along with team statistics.
+```./exe```
+
+5. **View the Results:** Once the simulation is complete, the program will display the final league table along with team statistics.
 
 ## Contributions
 
