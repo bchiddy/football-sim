@@ -16,11 +16,11 @@ To use the Premier League Simulator, follow these steps:
 
 1. **Clone the Repository:** Start by cloning this repository to your local machine.
 
-git clone https://github.com/bchiddy/football-sim
+```git clone https://github.com/bchiddy/football-sim```
 
 2. **Compile the Program:** Compile the C++ source code using your preferred compiler. For example, using `g++`:
 
-g++ -o simulator main.cpp
+```g++ -o simulator main.cpp```
 
 3. **Run the Program:** Execute the compiled binary to start the Premier League simulation.
 
